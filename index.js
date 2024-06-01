@@ -1,9 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import ProductsRouter from "./routes/product.route.js";
+import dotenv from "dotenv";
 
 const app = express();
 const port = 3000;
+dotenv.config();
 
 //middleware
 app.use(express.json());
@@ -17,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose
-  .connect("mongodb+srv://bruhmius:bruhmius@cluster0.ekihjjo.mongodb.net/CRUD")
+  .connect(process.env.CONNECTION_STRING)
   .then(() => {
     console.log("Database Connection Successful!");
     app.listen(3000, () => {
